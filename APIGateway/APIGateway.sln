@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "APIGateway\APIGateway.csproj", "{393F35D0-9DEA-43C5-9EA4-309BA5C2B41D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bupa.Services.Tests", "Bupa.Services.Tests\Bupa.Services.Tests.csproj", "{304AB884-46CD-47D4-A275-8B70EAB406E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393F35D0-9DEA-43C5-9EA4-309BA5C2B41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393F35D0-9DEA-43C5-9EA4-309BA5C2B41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393F35D0-9DEA-43C5-9EA4-309BA5C2B41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393F35D0-9DEA-43C5-9EA4-309BA5C2B41D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304AB884-46CD-47D4-A275-8B70EAB406E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304AB884-46CD-47D4-A275-8B70EAB406E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304AB884-46CD-47D4-A275-8B70EAB406E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304AB884-46CD-47D4-A275-8B70EAB406E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15BE0E4C-8335-4B71-9836-17F8EE3391FD}
+	EndGlobalSection
+EndGlobal
