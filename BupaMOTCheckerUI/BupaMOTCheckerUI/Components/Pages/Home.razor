@@ -1,0 +1,94 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using BupaMOTCheckerUI.Services
+@using BupaMOTCheckerUI.Model
+@inject ApiService ApiService
+<PageTitle>MOT Checker</PageTitle>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">MOT Checker</h1>
+
+            <div class="input-group mb-3">
+                <input @bind="registration" class="form-control" placeholder="Enter registration" />
+                <button class="btn btn-primary" @onclick="FetchVehicle">Get Vehicle</button>
+            </div>
+
+            @if (vehicleResponse != null)
+            {
+                @if (string.IsNullOrEmpty(vehicleResponse.ErrorMessage))
+                {
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3>Car Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Make</th>
+                                    <td>@vehicleResponse.Vehicle.Make</td>
+                                </tr>
+                                <tr>
+                                    <th>Model</th>
+                                    <td>@vehicleResponse.Vehicle.Model</td>
+                                </tr>                                
+                                <tr>
+                                    <th>Primary Colour</th>
+                                    <td>@vehicleResponse.Vehicle.PrimaryColour</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header bg-success text-white">
+                            <h3>Last MOT Test Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>MOT Expiry Date:</label>
+                                        <p class="form-control-static">@GetFormattedDate(lastMotTest?.ExpiryDate)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mileage at Last MOT:</label>
+                                        <p class="form-control-static">@lastMotTest?.OdometerValue @lastMotTest?.OdometerUnit</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger mt-4">
+                        <p>No MOT Tests found with vehicle registration</p>
+                    </div>
+                }
+            }       
+        </div>
+    </div>
+</div>
+
+@code {
+    private string registration;
+    private VehicleResponse vehicleResponse;
+    private MotTest lastMotTest;
+    private async Task FetchVehicle()
+    {
+        vehicleResponse = await ApiService.GetVehicleAsync(registration);
+        lastMotTest = vehicleResponse?.Vehicle?.MotTests?.OrderByDescending(m => m.CompletedDate).FirstOrDefault();
+    }
+    private string GetFormattedDate(string dateString)
+    {
+        if (DateTime.TryParse(dateString, out DateTime date))
+        {
+            return date.ToString("dd MMM yyyy");
+        }
+        return dateString;
+    }
+}
