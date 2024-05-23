@@ -2,7 +2,7 @@
 
 namespace APIGateway.Domain.Entities
 {
-    public class Vehicle
+    public class Vehicle : IEquatable<Vehicle>
     {
         [JsonPropertyName("registration")]
         public string Registration { get; set; }
@@ -24,6 +24,26 @@ namespace APIGateway.Domain.Entities
 
         [JsonPropertyName("motTests")]
         public List<MotTest> MotTests { get; set; }
+        public bool Equals(Vehicle? other)
+        {
+            if (other == null) return false;
+            return Registration == other.Registration &&
+                   Make == other.Make &&
+                   Model == other.Model &&
+                   FirstUsedDate == other.FirstUsedDate &&
+                   FuelType == other.FuelType &&
+                   PrimaryColour == other.PrimaryColour &&
+                   (MotTests == other.MotTests || (MotTests != null && other.MotTests != null && MotTests.SequenceEqual(other.MotTests)));
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Vehicle);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Registration, Make, Model, FirstUsedDate, FuelType, PrimaryColour, MotTests);
+        }
     }
 
     public class MotTest
@@ -58,9 +78,19 @@ namespace APIGateway.Domain.Entities
         [JsonPropertyName("type")]
         public string Type { get; set; }
     }
-    public class VehicleResponse
+    public class VehicleResponse : IEquatable<VehicleResponse>
     {
         public Vehicle Vehicle { get; set; }
         public string ErrorMessage { get; set; }
+        public bool Equals(VehicleResponse other)
+        {
+            if (other == null) return false;
+            return ErrorMessage == other.ErrorMessage &&
+                   (Vehicle == other.Vehicle || (Vehicle != null && Vehicle.Equals(other.Vehicle)));
+        }      
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Vehicle, ErrorMessage);
+        }
     }
 }
