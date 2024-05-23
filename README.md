@@ -86,7 +86,8 @@ Acts as the entry point for the front-end application to interact with the backe
 
 
 ## Workflow
-![image](https://github.com/zahmed28/BupaMOTChecker/assets/86317150/7d668ea2-93de-4eb4-b53a-7cd8f3a3ca94)
+![image](https://github.com/zahmed28/BupaMOTChecker/assets/86317150/4a77bbe7-e7fe-48bc-ad81-f934cc70fd4c)
+
 
 
 
